@@ -54,8 +54,8 @@ public class ThreadDemo01 {
 		private int number = 0;
 
 		public synchronized void incr() throws InterruptedException {
-			if (number != 0) {
-				this.wait(); //在哪睡就在哪醒
+			while (number != 0) {
+				this.wait(); //if虚假唤醒：在哪睡就在哪醒
 			}
 
 			number++;
@@ -65,7 +65,7 @@ public class ThreadDemo01 {
 		}
 
 		public synchronized void decr() throws InterruptedException {
-			if (number != 1) {
+			while (number != 1) {
 				this.wait();
 			}
 
