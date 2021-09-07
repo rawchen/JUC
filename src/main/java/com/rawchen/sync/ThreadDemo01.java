@@ -28,6 +28,26 @@ public class ThreadDemo01 {
 				}
 			}
 		}, "BB").start();
+
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					share.incr();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "CC").start();
+
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					share.decr();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "DD").start();
 	}
 
 	static class Share {
@@ -35,7 +55,7 @@ public class ThreadDemo01 {
 
 		public synchronized void incr() throws InterruptedException {
 			if (number != 0) {
-				this.wait();
+				this.wait(); //在哪睡就在哪醒
 			}
 
 			number++;
