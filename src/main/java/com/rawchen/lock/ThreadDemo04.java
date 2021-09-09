@@ -1,7 +1,8 @@
 package com.rawchen.lock;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author RawChen
@@ -18,15 +19,39 @@ public class ThreadDemo04 {
 //		List<String> list = Collections.synchronizedList(new ArrayList<>());
 
 		//CopyOnWriteArrayList解决
-		List<String> list = new CopyOnWriteArrayList<>();
+//		List<String> list = new CopyOnWriteArrayList<>();
+//
+//		for (int i = 0; i < 10; i++) {
+//			new Thread(() -> {
+//				//向集合添加内容
+//				list.add(UUID.randomUUID().toString().substring(0, 8));
+//				System.out.println(list);
+//
+//				//向集合获取内容
+//			}, String.valueOf(i)).start();
+//		}
 
-		for (int i = 0; i < 10; i++) {
+//		Set<String> set = new CopyOnWriteArraySet<>();
+//
+//		for (int i = 0; i < 10; i++) {
+//			new Thread(() -> {
+//				//向集合添加内容
+//				set.add(UUID.randomUUID().toString().substring(0, 8));
+//				System.out.println(set);
+//
+//				//向集合获取内容
+//			}, String.valueOf(i)).start();
+//		}
+
+		Map<String, String> map = new ConcurrentHashMap<>();
+
+		for (int i = 0; i < 30; i++) {
+			String key = String.valueOf(i);
 			new Thread(() -> {
-				//向集合添加内容
-				list.add(UUID.randomUUID().toString().substring(0, 8));
-				System.out.println(list);
-
-				//向集合获取内容
+				//向map添加内容
+				map.put(key, UUID.randomUUID().toString().substring(0, 8));
+				System.out.println(map);
+				//向map获取内容
 			}, String.valueOf(i)).start();
 		}
 	}
