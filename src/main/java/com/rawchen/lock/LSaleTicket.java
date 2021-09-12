@@ -40,7 +40,7 @@ public class LSaleTicket {
 		private int number = 30;
 
 		//创建可重入锁
-		private final ReentrantLock lock = new ReentrantLock();
+		private final ReentrantLock lock = new ReentrantLock(true); //公平锁
 
 		//卖票
 		public void sale() {

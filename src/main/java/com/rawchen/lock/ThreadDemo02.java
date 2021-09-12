@@ -57,7 +57,7 @@ public class ThreadDemo02 {
 class Share {
 	private int number = 0;
 
-	private Lock lock = new ReentrantLock(true); //公平锁
+	private Lock lock = new ReentrantLock();
 	private Condition condition = lock.newCondition();
 
 	public void incr() throws InterruptedException {
