@@ -16,20 +16,25 @@ public class Demo01 {
 	public static void main(String[] args) throws ExecutionException, InterruptedException {
 		new Thread(new MyThread01(), "AA").start();
 
+		//Callable接口报错
 //		new Thread(new MyThread02(), "BB").start();
 
 		FutureTask<Integer> futureTask01 = new FutureTask<>(new MyThread02());
 
 		FutureTask<Integer> futureTask02 = new FutureTask<>(() -> {
-			System.out.println(Thread.currentThread().getName() + " :: F2");
+			System.out.println(Thread.currentThread().getName() + " :: come in Callable");
 			return 1024;
 		});
 
-		new Thread(futureTask01, "F1").start();
+		new Thread(futureTask02, "lucy").start();
 
-		new Thread(futureTask02, "F2").start();
+		while (!futureTask02.isDone()) {
+			System.out.println("wait...");
+		}
 
 		System.out.println(futureTask02.get());
+
+		System.out.println(Thread.currentThread().getName() + " :: come over");
 	}
 }
 
