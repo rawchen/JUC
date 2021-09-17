@@ -27,10 +27,11 @@ public class Demo01 {
 		});
 
 		new Thread(futureTask02, "lucy").start();
+		new Thread(futureTask01, "mary").start();
 
-		while (!futureTask02.isDone()) {
-			System.out.println("wait...");
-		}
+//		while (!futureTask02.isDone()) {
+//			System.out.println("wait...");
+//		}
 
 		System.out.println(futureTask02.get());
 
