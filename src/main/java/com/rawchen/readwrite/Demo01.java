@@ -13,11 +13,22 @@ public class Demo01 {
 		ReentrantReadWriteLock.ReadLock readLock = rwLock.readLock();	//读锁
 		ReentrantReadWriteLock.WriteLock writeLock = rwLock.writeLock();//写锁
 
-		writeLock.lock();
+		//获取读锁
+		readLock.lock();
+		System.out.println("read");
 
+		//获取写锁
+		writeLock.lock();
 		System.out.println("RawChen");
+
+
+		//上面两读写锁互换位置
+
+
+		//释放写锁
 //		writeLock.unlock();
 
-		readLock.lock();
+		//释放写锁
+//		readLock.unlock();
 	}
 }
